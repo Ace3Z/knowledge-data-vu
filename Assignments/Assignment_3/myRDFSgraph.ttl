@@ -1,0 +1,40 @@
+@prefix food: <http://example.com/food#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+food:Dish a rdfs:Class ;
+    rdfs:label "Dish"@en ;
+    food:hasCategory food:Dish ;
+    rdfs:subClassOf food:Food .
+
+food:Fruit a rdfs:Class ;
+    rdfs:label "Fruit"@en ;
+    food:hasCategory food:Fruit ;
+    rdfs:subClassOf food:Food .
+
+food:Ingredient a rdfs:Class ;
+    rdfs:label "Ingredient"@en ;
+    food:hasCategory food:Ingredient ;
+    rdfs:subClassOf food:Food .
+
+food:Vegetable a rdfs:Class ;
+    rdfs:label "Vegetable"@en ;
+    food:hasCategory food:Vegetable ;
+    rdfs:subClassOf food:Food .
+
+food:hasCategory a rdf:Property ;
+    rdfs:label "Has Category"@en ;
+    rdfs:range food:Food .
+
+food:hasTaste a rdf:Property ;
+    rdfs:label "Has Taste"@en ;
+    rdfs:domain food:Food .
+
+food:isPartOf a rdf:Property ;
+    rdfs:label "Is Part Of"@en ;
+    rdfs:domain food:Food .
+
+food:isUsedIn a rdf:Property ;
+    rdfs:label "Is Used In"@en ;
+    rdfs:domain food:Food .
+
