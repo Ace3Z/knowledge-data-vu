@@ -16,20 +16,6 @@
 #    Object Properties
 #################################################################
 
-###  http://example.com/my_animals#eatSeedsWith
-:eatSeedsWith rdf:type owl:ObjectProperty ;
-              rdfs:domain :NonFlying_Bird ;
-              rdfs:range :NonFlying_Bird ;
-              rdfs:comment "This property represents the eating situation of non flying birds." .
-
-
-###  http://example.com/my_animals#swimWith
-:swimWith rdf:type owl:ObjectProperty ;
-          rdfs:domain :Fish ;
-          rdfs:range :Fish ;
-          rdfs:comment "This property represents what fishes swim together." .
-
-
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/FeedsMilk
 :FeedsMilk rdf:type owl:ObjectProperty ;
            rdfs:domain :Mammal ;
@@ -38,10 +24,19 @@
 
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/FlyTogether
-:FlyTogether rdf:type owl:ObjectProperty ;
+:FlyTogether rdf:type owl:ObjectProperty ,
+                      owl:SymmetricProperty ,
+                      owl:TransitiveProperty ;
              rdfs:domain :Flying_Bird ;
              rdfs:range :Flying_Bird ;
              rdfs:comment "This property represents the flying situation between birds." .
+
+
+###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/eatSeedsWith
+:eatSeedsWith rdf:type owl:ObjectProperty ;
+              rdfs:domain :NonFlying_Bird ;
+              rdfs:range :NonFlying_Bird ;
+              rdfs:comment "This property represents the eating situation of non flying birds." .
 
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/isPredatorOf
@@ -52,42 +47,30 @@
 
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/matesWith
-:matesWith rdf:type owl:ObjectProperty ;
+:matesWith rdf:type owl:ObjectProperty ,
+                    owl:SymmetricProperty ;
            rdfs:domain :Reptile ;
            rdfs:range :Reptile ;
            rdfs:comment "This property represents the mating y relationship between animals." .
+
+
+###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/swimWith
+:swimWith rdf:type owl:ObjectProperty ,
+                   owl:SymmetricProperty ;
+          rdfs:domain :Fish ;
+          rdfs:range :Fish ;
+          rdfs:comment "This property represents what fishes swim together." .
 
 
 #################################################################
 #    Data properties
 #################################################################
 
-###  http://example.com/my_animals#canJumpHigh
+###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/canJumpHigh
 :canJumpHigh rdf:type owl:DatatypeProperty ;
              rdfs:domain :NonFlying_Bird ;
              rdfs:range xsd:boolean ;
              rdfs:comment "This property represents if the bird can jump when they can not fly." .
-
-
-###  http://example.com/my_animals#hasAltitude
-:hasAltitude rdf:type owl:DatatypeProperty ;
-             rdfs:domain :Flying_Bird ;
-             rdfs:range xsd:decimal ;
-             rdfs:comment "This property represents the average altitude the birds can fly." .
-
-
-###  http://example.com/my_animals#hasAntena
-:hasAntena rdf:type owl:DatatypeProperty ;
-           rdfs:domain :Insect ;
-           rdfs:range xsd:boolean ;
-           rdfs:comment "This property represents if the insect has antena or not." .
-
-
-###  http://example.com/my_animals#hasNipples
-:hasNipples rdf:type owl:DatatypeProperty ;
-            rdfs:domain :Mammal ;
-            rdfs:range xsd:boolean ;
-            rdfs:comment "This property represents if the mamal has nipples." .
 
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/doesCrawl
@@ -95,6 +78,27 @@
            rdfs:domain :Reptile ;
            rdfs:range xsd:boolean ;
            rdfs:comment "This property represents if a reptile can crawl." .
+
+
+###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/hasAltitude
+:hasAltitude rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Flying_Bird ;
+             rdfs:range xsd:decimal ;
+             rdfs:comment "This property represents the average altitude the birds can fly." .
+
+
+###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/hasAntena
+:hasAntena rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Insect ;
+           rdfs:range xsd:boolean ;
+           rdfs:comment "This property represents if the insect has antena or not." .
+
+
+###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/hasNipples
+:hasNipples rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Mammal ;
+            rdfs:range xsd:boolean ;
+            rdfs:comment "This property represents if the mamal has nipples." .
 
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/hasScale
@@ -108,14 +112,8 @@
 #    Classes
 #################################################################
 
-###  http://example.com/my_animals#SeaAnimals
-:SeaAnimals rdf:type owl:Class ;
-            rdfs:comment "This class represents all sea animals." .
-
-
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/Fish
 :Fish rdf:type owl:Class ;
-      rdfs:subClassOf :SeaAnimals ;
       rdfs:comment "This class represents fish." .
 
 
@@ -131,6 +129,10 @@
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/Mammal
 :Mammal rdf:type owl:Class ;
+        owl:equivalentClass [ rdf:type owl:Restriction ;
+                              owl:onProperty :FeedsMilk ;
+                              owl:someValuesFrom :Mammal
+                            ] ;
         rdfs:comment "This class represents mammals." .
 
 
@@ -144,26 +146,39 @@
          rdfs:comment "This class represents reptiles." .
 
 
+###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/SeaAnimals
+:SeaAnimals rdf:type owl:Class ;
+            owl:equivalentClass [ rdf:type owl:Restriction ;
+                                  owl:onProperty :swimWith ;
+                                  owl:someValuesFrom :Fish
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :swimWith ;
+                                  owl:someValuesFrom :SeaAnimals
+                                ] ;
+            rdfs:comment "This class represents all sea animals." .
+
+
 #################################################################
 #    Individuals
 #################################################################
 
-###  http://example.com/my_animals#Liger
-:Liger rdf:type owl:NamedIndividual ,
-                :Mammal ;
-       :FeedsMilk :Liger ;
-       :hasNipples "true"^^xsd:boolean .
+###  http://example.com/my_animals#Octapus
+:Octapus rdf:type owl:NamedIndividual ;
+         :swimWith :Octapus ;
+         :hasScale "false"^^xsd:boolean .
 
 
-###  http://example.com/my_animals#kiwi
-:kiwi rdf:type owl:NamedIndividual ,
-               :NonFlying_Bird ;
-      :eatSeedsWith :Ostrich ;
-      :canJumpHigh "true"^^xsd:boolean .
+###  http://example.com/my_animals#Squid
+:Squid rdf:type owl:NamedIndividual ,
+                :SeaAnimals ;
+       :swimWith :Squid ;
+       :hasScale "false"^^xsd:boolean .
 
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/Ant
-:Ant rdf:type owl:NamedIndividual ;
+:Ant rdf:type owl:NamedIndividual ,
+              :Insect ;
      :isPredatorOf :Ant ;
      :hasAntena "true"^^xsd:boolean .
 
@@ -175,10 +190,16 @@
 
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/Goldfish
-:Goldfish rdf:type owl:NamedIndividual ,
-                   :SeaAnimals ;
+:Goldfish rdf:type owl:NamedIndividual ;
           :swimWith :Goldfish ;
           :hasScale "false"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/Liger
+:Liger rdf:type owl:NamedIndividual ,
+                :Mammal ;
+       :FeedsMilk :Liger ;
+       :hasNipples "true"^^xsd:boolean .
 
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/Lion
@@ -224,6 +245,13 @@
 :Turtle rdf:type owl:NamedIndividual ;
         :matesWith :Turtle ;
         :doesCrawl "false"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/kiwi
+:kiwi rdf:type owl:NamedIndividual ,
+               :NonFlying_Bird ;
+      :eatSeedsWith :Ostrich ;
+      :canJumpHigh "true"^^xsd:boolean .
 
 
 ###  Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi
