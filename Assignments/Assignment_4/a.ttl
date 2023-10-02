@@ -20,6 +20,7 @@
 :FeedsMilk rdf:type owl:ObjectProperty ;
            rdfs:domain :Mammal ;
            rdfs:range :Mammal ;
+           owl:propertyDisjointWith :matesWith ;
            rdfs:comment "This property represents the milk feeding of the parents to the babies." .
 
 
@@ -39,8 +40,7 @@
 
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/isPredatorOf
-:isPredatorOf rdf:type owl:ObjectProperty ,
-                       owl:AsymmetricProperty ;
+:isPredatorOf rdf:type owl:ObjectProperty ;
               rdfs:domain :Insect ;
               rdfs:range :Insect ;
               rdfs:comment "This property represents the predator-prey relationship between mamals." .
