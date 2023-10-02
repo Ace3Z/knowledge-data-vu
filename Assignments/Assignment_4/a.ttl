@@ -24,7 +24,8 @@
 
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/FlyTogether
-:FlyTogether rdf:type owl:ObjectProperty ;
+:FlyTogether rdf:type owl:ObjectProperty ,
+                      owl:SymmetricProperty ;
              rdfs:domain :Flying_Bird ;
              rdfs:range :Flying_Bird ;
              rdfs:comment "This property represents the flying situation between birds." .
@@ -38,21 +39,24 @@
 
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/isPredatorOf
-:isPredatorOf rdf:type owl:ObjectProperty ;
+:isPredatorOf rdf:type owl:ObjectProperty ,
+                       owl:AsymmetricProperty ;
               rdfs:domain :Insect ;
               rdfs:range :Insect ;
               rdfs:comment "This property represents the predator-prey relationship between mamals." .
 
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/matesWith
-:matesWith rdf:type owl:ObjectProperty ;
+:matesWith rdf:type owl:ObjectProperty ,
+                    owl:FunctionalProperty ;
            rdfs:domain :Reptile ;
            rdfs:range :Reptile ;
            rdfs:comment "This property represents the mating y relationship between animals." .
 
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/swimWith
-:swimWith rdf:type owl:ObjectProperty ;
+:swimWith rdf:type owl:ObjectProperty ,
+                   owl:TransitiveProperty ;
           rdfs:domain :Fish ,
                       :SeaAnimals ;
           rdfs:range :Fish ,
@@ -161,19 +165,6 @@
 #    Individuals
 #################################################################
 
-###  http://example.com/my_animals#Octapus
-:Octapus rdf:type owl:NamedIndividual ;
-         :swimWith :Octapus ;
-         :hasScale "false"^^xsd:boolean .
-
-
-###  http://example.com/my_animals#Squid
-:Squid rdf:type owl:NamedIndividual ,
-                :SeaAnimals ;
-       :swimWith :Squid ;
-       :hasScale "false"^^xsd:boolean .
-
-
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/Ant
 :Ant rdf:type owl:NamedIndividual ,
               :Insect ;
@@ -204,6 +195,12 @@
 :Lion rdf:type owl:NamedIndividual ;
       :FeedsMilk :Liger ;
       :hasNipples "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/Octapus
+:Octapus rdf:type owl:NamedIndividual ;
+         :swimWith :Octapus ;
+         :hasScale "false"^^xsd:boolean .
 
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/Ostrich
@@ -237,6 +234,13 @@
                 :Reptile ;
        :matesWith :Snake ;
        :doesCrawl "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/Squid
+:Squid rdf:type owl:NamedIndividual ,
+                :SeaAnimals ;
+       :swimWith :Squid ;
+       :hasScale "false"^^xsd:boolean .
 
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/Turtle
