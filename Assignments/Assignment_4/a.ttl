@@ -24,9 +24,7 @@
 
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/FlyTogether
-:FlyTogether rdf:type owl:ObjectProperty ,
-                      owl:SymmetricProperty ,
-                      owl:TransitiveProperty ;
+:FlyTogether rdf:type owl:ObjectProperty ;
              rdfs:domain :Flying_Bird ;
              rdfs:range :Flying_Bird ;
              rdfs:comment "This property represents the flying situation between birds." .
@@ -47,18 +45,18 @@
 
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/matesWith
-:matesWith rdf:type owl:ObjectProperty ,
-                    owl:SymmetricProperty ;
+:matesWith rdf:type owl:ObjectProperty ;
            rdfs:domain :Reptile ;
            rdfs:range :Reptile ;
            rdfs:comment "This property represents the mating y relationship between animals." .
 
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/swimWith
-:swimWith rdf:type owl:ObjectProperty ,
-                   owl:SymmetricProperty ;
-          rdfs:domain :Fish ;
-          rdfs:range :Fish ;
+:swimWith rdf:type owl:ObjectProperty ;
+          rdfs:domain :Fish ,
+                      :SeaAnimals ;
+          rdfs:range :Fish ,
+                     :SeaAnimals ;
           rdfs:comment "This property represents what fishes swim together." .
 
 
@@ -114,6 +112,14 @@
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/Fish
 :Fish rdf:type owl:Class ;
+      owl:equivalentClass [ rdf:type owl:Restriction ;
+                            owl:onProperty :swimWith ;
+                            owl:someValuesFrom :Fish
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :swimWith ;
+                            owl:someValuesFrom :SeaAnimals
+                          ] ;
       rdfs:comment "This class represents fish." .
 
 
@@ -130,7 +136,7 @@
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/Mammal
 :Mammal rdf:type owl:Class ;
         owl:equivalentClass [ rdf:type owl:Restriction ;
-                              owl:onProperty :FeedsMilk ;
+                              owl:onProperty :matesWith ;
                               owl:someValuesFrom :Mammal
                             ] ;
         rdfs:comment "This class represents mammals." .
@@ -148,14 +154,6 @@
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/SeaAnimals
 :SeaAnimals rdf:type owl:Class ;
-            owl:equivalentClass [ rdf:type owl:Restriction ;
-                                  owl:onProperty :swimWith ;
-                                  owl:someValuesFrom :Fish
-                                ] ,
-                                [ rdf:type owl:Restriction ;
-                                  owl:onProperty :swimWith ;
-                                  owl:someValuesFrom :SeaAnimals
-                                ] ;
             rdfs:comment "This class represents all sea animals." .
 
 
@@ -204,7 +202,7 @@
 
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/Lion
 :Lion rdf:type owl:NamedIndividual ;
-      :FeedsMilk :Lion ;
+      :FeedsMilk :Liger ;
       :hasNipples "true"^^xsd:boolean .
 
 
