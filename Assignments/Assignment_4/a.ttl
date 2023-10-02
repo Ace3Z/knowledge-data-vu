@@ -136,7 +136,7 @@
 ###  http://www.semanticweb.org/mahbo/ontologies/2023/9/untitled-ontology-3/Mammal
 :Mammal rdf:type owl:Class ;
         owl:equivalentClass [ rdf:type owl:Restriction ;
-                              owl:onProperty :matesWith ;
+                              owl:onProperty :FeedsMilk ;
                               owl:someValuesFrom :Mammal
                             ] ;
         rdfs:comment "This class represents mammals." .
